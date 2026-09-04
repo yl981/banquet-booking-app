@@ -11,6 +11,13 @@
 
 ---
 
+## 📸 Application Screenshots
+
+### 🌟 Landing Page Design Showcase
+![Banquite Landing Page Preview](docs/images/landing_page_preview.jpg)
+
+---
+
 ## ✨ Features & Highlights
 
 ### 🎨 1. Luxury Landing Page (Pixel-Perfect Design)
