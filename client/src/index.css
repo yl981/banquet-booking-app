@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.custom-shadow {
+  box-shadow: 0 10px 30px -10px rgba(160, 113, 39, 0.15);
+}
+
+.curved-banner-bg {
+  background: linear-gradient(135deg, #f7f1e5 0%, #efe4d1 100%);
+}
