@@ -36,6 +36,7 @@ router.post('/', protect, async (req, res) => {
 
     const booking = new Booking({
       user: req.user._id,
+      email: (contactDetails && contactDetails.email) || req.user.email || req.body.email,
       venue: venueId,
       eventDate,
       eventType,

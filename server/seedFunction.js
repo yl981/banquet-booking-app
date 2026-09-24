@@ -228,22 +228,28 @@ async function seedSampleData(force = false) {
       ]);
 
       await Booking.create({
-        user: demoCustomer._id,
-        venue: createdVenues[0]._id,
-        eventDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-        eventType: 'Weddings',
-        timeSlot: 'Evening (5 PM - 11 PM)',
-        guestCount: 300,
-        cateringPreference: 'Veg',
-        totalAmount: 300 * 1850 + 120000,
-        status: 'Confirmed',
-        contactDetails: {
-          name: 'Aarav Sharma',
-          email: 'user@banquite.com',
-          phone: '+91 98765 43210',
-        },
-        specialRequests: 'Need grand flower entryway and golden tablecloths.',
-      });
+  user: demoCustomer._id,
+
+  // New field added
+  email: 'user@banquite.com',
+
+  venue: createdVenues[0]._id,
+  eventDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+  eventType: 'Weddings',
+  timeSlot: 'Evening (5 PM - 11 PM)',
+  guestCount: 300,
+  cateringPreference: 'Veg',
+  totalAmount: 300 * 1850 + 120000,
+  status: 'Confirmed',
+
+  contactDetails: {
+    name: 'Aarav Sharma',
+    email: 'user@banquite.com',
+    phone: '+91 98765 43210',
+  },
+
+  specialRequests: 'Need grand flower entryway and golden tablecloths.',
+});
     }
 
     return {

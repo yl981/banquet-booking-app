@@ -6,6 +6,13 @@ const bookingSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+
+  //New field Added
+  email: {
+    type: String,
+    required: true
+  },
+
   venue: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Venue',
