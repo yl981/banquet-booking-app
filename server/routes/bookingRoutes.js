@@ -10,6 +10,7 @@ router.post('/', protect, async (req, res) => {
   try {
     const {
       venueId,
+      email,
       eventDate,
       eventType,
       timeSlot,
@@ -24,6 +25,11 @@ router.post('/', protect, async (req, res) => {
       return res.status(404).json({ message: 'Venue not found' });
     }
 
+    const bookingEmail = email || contactDetails?.email || req.user?.email;
+    if (!bookingEmail) {
+      return res.status(400).json({ message: 'Email is required for booking' });
+    }
+
     // Calculate total price
     let platePrice = venue.pricePerPlateVeg;
     if (cateringPreference === 'Non-Veg') {
@@ -36,7 +42,7 @@ router.post('/', protect, async (req, res) => {
 
     const booking = new Booking({
       user: req.user._id,
-      email: (contactDetails && contactDetails.email) || req.user.email || req.body.email,
+      email: bookingEmail,
       venue: venueId,
       eventDate,
       eventType,
@@ -44,10 +50,10 @@ router.post('/', protect, async (req, res) => {
       guestCount,
       cateringPreference,
       totalAmount,
-      contactDetails: contactDetails || {
-        name: req.user.name,
-        email: req.user.email,
-        phone: req.user.phone || '',
+      contactDetails: {
+        name: contactDetails?.name || req.user?.name || 'Valued Guest',
+        email: contactDetails?.email || bookingEmail,
+        phone: contactDetails?.phone || req.user?.phone || '',
       },
       specialRequests: specialRequests || '',
       status: 'Pending',

@@ -51,6 +51,7 @@ const BookingModal = ({ venue, isOpen, onClose, onSuccess }) => {
     try {
       const res = await API.post('/bookings', {
         venueId: venue._id,
+        email: contactEmail,
         eventDate,
         eventType,
         timeSlot,
