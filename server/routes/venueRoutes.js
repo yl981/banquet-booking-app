@@ -2,11 +2,29 @@ const express = require('express');
 const router = express.Router();
 const Venue = require('../models/Venue');
 const { protect, adminOnly } = require('../middleware/auth');
+const { seedSampleData } = require('../seedFunction');
+
+// @route   GET /api/venues/seed
+// @desc    Manually trigger database seeding with sample luxury venues & test accounts
+router.get('/seed', async (req, res) => {
+  try {
+    const result = await seedSampleData();
+    res.json({ message: 'Database seeded successfully', details: result });
+  } catch (error) {
+    res.status(500).json({ message: 'Seeding failed', error: error.message });
+  }
+});
 
 // @route   GET /api/venues
 // @desc    Get all venues with optional filters (city, category, guestCount, priceRange, search)
 router.get('/', async (req, res) => {
   try {
+    // Auto-seed if database is completely empty
+    const totalCount = await Venue.countDocuments();
+    if (totalCount === 0) {
+      await seedSampleData();
+    }
+
     const { city, category, guests, maxPrice, search, featured, sort } = req.query;
 
     let query = {};

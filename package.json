@@ -4,11 +4,20 @@
   "description": "Full-stack MERN Banquet Booking Application - Banquite",
   "main": "server/index.js",
   "scripts": {
+    "build": "cd client && npm install && npm run build",
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
     "seed": "cd server && node seed.js",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
